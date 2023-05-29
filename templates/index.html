@@ -5,9 +5,11 @@
   </head>
   <body>
     <h1>Thief Detection</h1>
-    <form action="/detect" method="post" enctype="multipart/form-data">
-      <input type="file" name="image">
-      <input type="submit" value="Detect">
-    </form>
+    <img src="{{ url_for('static', filename='thief_images/thief1.jpg') }}" alt="Thief 1">
+    <img src="{{ url_for('static', filename='thief_images/thief2.jpg') }}" alt="Thief 2">
+    <img src="{{ url_for('static', filename='thief_images/thief3.jpg') }}" alt="Thief 3">
+    <!-- Add more <img> tags for additional thief images -->
+    <br><br>
+    <img src="{{ url_for('video_feed') }}" alt="Video Feed" width="640" height="480">
   </body>
 </html>
