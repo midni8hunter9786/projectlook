@@ -8,7 +8,7 @@ app = Flask(__name__)
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 # Load the collection of thief images
-thief_images = [ cv2.imread('thief_images/thief1.jpg'),cv2.imread('thief_images/thief2.jpg')]  # List of thief images
+thief_images = [cv2.imread('thief_images/thief1.jpg'), cv2.imread('thief_images/thief2.jpg')]  # List of thief images
 
 
 def detect_thief():
@@ -18,6 +18,9 @@ def detect_thief():
     while True:
         # Capture frame-by-frame
         ret, frame = cap.read()
+
+        if not ret:
+            break
 
         # Convert the frame to grayscale for face detection
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -45,8 +48,10 @@ def detect_thief():
                 locations = np.where(result >= threshold)
                 for loc in zip(*locations[::-1]):
                     # Draw a rectangle around the matched area
-                    cv2.rectangle(frame, (x + loc[0], y + loc[1]), (x + loc[0] + w, y + loc[1] + h), (0, 0, 255), 2)
-                    cv2.putText(frame, 'Thief', (x + loc[0], y + loc[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+                    cv2.rectangle(frame, (x + loc[0], y + loc[1]), (x + loc[0] + w, y + loc[1] + h),
+                                  (0, 0, 255), 2)
+                    cv2.putText(frame, 'Thief', (x + loc[0], y + loc[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9,
+                                (0, 0, 255), 2)
 
         # Convert the frame to JPEG format
         ret, jpeg = cv2.imencode('.jpg', frame)
