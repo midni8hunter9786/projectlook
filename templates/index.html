@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Virtual Match Camera</title>
+    <title>Thief Detection</title>
   </head>
   <body>
-    <h1>Virtual Match Camera</h1>
-    <img src="{{ url_for('video_feed') }}" width="640" height="480" />
+    <h1>Thief Detection</h1>
+    <form action="/detect" method="post" enctype="multipart/form-data">
+      <input type="file" name="image">
+      <input type="submit" value="Detect">
+    </form>
   </body>
 </html>
